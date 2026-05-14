@@ -72,8 +72,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-import { posts } from "@/lib/posts";
-
 /* ---------- data ---------- */
 
 const features = [
