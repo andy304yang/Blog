@@ -377,7 +377,7 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer className="border-t border-slate-800">
         <div className="max-w-2xl mx-auto px-5 py-6 flex items-center justify-between">
-          <p className="text-xs text-slate-700">© {new Date().getFullYear()} Saylo · Built with Next.js</p>
+          <p className="text-xs text-slate-700">© {new Date().getFullYear()} Saylo · Built with Next.js · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-500 transition-colors">粤ICP备2026057233号-1</a></p>
           <a href="https://github.com/andy304yang" target="_blank" rel="noopener noreferrer"
             className="text-slate-700 hover:text-slate-400 transition-colors">
             <GitHubIcon className="w-4 h-4" />
