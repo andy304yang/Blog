@@ -300,6 +300,77 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Dream 项目 */}
+            <div className="p-5 rounded-xl border border-slate-800 bg-slate-900 mb-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-900 flex items-center justify-center flex-shrink-0">
+                  <Layers className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div>
+                  <h2 className="font-bold text-slate-100">Dream — Excel 智能处理</h2>
+                  <p className="text-xs text-slate-500">AI 驱动的 Excel 数据分析平台</p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed mb-4">
+                基于 MiniMax-M2 大模型对 Excel/CSV 文件进行智能解析、转换与数据分析。
+                支持多文件批量处理、NATURAL LANGUAGE 查询、自动生成图表报告。
+                腾讯云 81.71.29.84 独立部署，支持私有化定制。
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                <Tag><Cpu className="w-3 h-3" />Next.js 15</Tag>
+                <Tag><FileCode className="w-3 h-3" />FastAPI</Tag>
+                <Tag><Sparkles className="w-3 h-3" />MiniMax-M2</Tag>
+                <Tag><Shield className="w-3 h-3" />私有化部署</Tag>
+              </div>
+              <div className="flex gap-4">
+                <a href="https://mclarenai.cn/dream/" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
+                  <Globe className="w-4 h-4" />在线体验<ExternalLink className="w-3 h-3" />
+                </a>
+                <a href="https://github.com/andy304yang/dream" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
+                  <GitHubIcon className="w-4 h-4" />前端源码<ExternalLink className="w-3 h-3" />
+                </a>
+                <a href="https://github.com/andy304yang/cos" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
+                  <GitHubIcon className="w-4 h-4" />后端源码<ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* Component 组件库 */}
+            <div className="p-5 rounded-xl border border-slate-800 bg-slate-900 mb-5">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-violet-950 border border-violet-900 flex items-center justify-center flex-shrink-0">
+                  <Layers className="w-4 h-4 text-violet-400" />
+                </div>
+                <div>
+                  <h2 className="font-bold text-slate-100">Component — React 组件库</h2>
+                  <p className="text-xs text-slate-500">Vite + React + Storybook 组件开发工作流</p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed mb-4">
+                基于 Vite 构建的 React 组件库，含完整 Storybook 文档、SVGR 图标管道、
+                Vitest 集成测试。提供可复用 UI 组件，支撑内部项目快速迭代。
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                <Tag><Code2 className="w-3 h-3" />React 18</Tag>
+                <Tag><FileCode className="w-3 h-3" />Vite</Tag>
+                <Tag><BookOpen className="w-3 h-3" />Storybook</Tag>
+                <Tag><Shield className="w-3 h-3" />Vitest</Tag>
+              </div>
+              <div className="flex gap-4">
+                <a href="https://mclarenai.cn/component/" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-violet-400 hover:text-violet-300 transition-colors">
+                  <Globe className="w-4 h-4" />在线预览<ExternalLink className="w-3 h-3" />
+                </a>
+                <a href="https://github.com/andy304yang/Component" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
+                  <GitHubIcon className="w-4 h-4" />Source Code<ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
             {/* Features */}
             <SectionLabel>核心功能</SectionLabel>
             <div className="grid grid-cols-2 gap-3 mb-6">
