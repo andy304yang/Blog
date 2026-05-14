@@ -120,7 +120,7 @@ export default function Home() {
       <nav className="fixed top-0 inset-x-0 z-50 border-b border-slate-800 bg-[#0a0f1a]/90 backdrop-blur-md">
         <div className="max-w-2xl mx-auto px-5 h-13 flex items-center justify-between" style={{ height: 52 }}>
           <span className="font-bold text-slate-100 tracking-tight">
-            Saylo<span className="text-sky-400">.</span>
+            Andy<span className="text-sky-400">.</span>
           </span>
           <div className="flex items-center gap-5 text-sm text-slate-500">
             <button onClick={() => setTab("posts")} className={`transition-colors hover:text-slate-200 ${tab === "posts" ? "text-slate-200" : ""}`}>
@@ -144,14 +144,14 @@ export default function Home() {
           <div className="flex items-start gap-5">
             <Image
               src="/andy.jpeg"
-              alt="Saylo"
+              alt="Andy"
               width={64}
               height={64}
               className="rounded-2xl object-cover object-top flex-shrink-0"
               style={{ width: 64, height: 64 }}
             />
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-bold text-slate-100 mb-1">你好，我是 Saylo</h1>
+              <h1 className="text-xl font-bold text-slate-100 mb-1">你好，我是 Andy</h1>
               <p className="text-sm text-slate-500 mb-3">
                 全栈开发工程师 · 开源工具作者 · AI Agent 探索者
               </p>
@@ -237,6 +237,39 @@ export default function Home() {
         {/* ── Project Tab ── */}
         {tab === "project" && (
           <section className="pb-16">
+            {/* Saylo AI 项目 */}
+            <div className="p-5 rounded-xl border border-slate-800 bg-gradient-to-br from-amber-950 to-orange-950 mb-5">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-amber-900/50 border border-amber-800 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                </div>
+                <div>
+                  <h2 className="font-bold text-slate-100">Saylo AI <span className="text-xs bg-amber-900 text-amber-200 px-1.5 py-0.5 rounded ml-1">千万下载量</span></h2>
+                  <p className="text-xs text-amber-300/70">AI Story App · Google Play 热门应用</p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-300 leading-relaxed mb-4">
+                自主研发的 AI 对话故事应用，集成先进的大语言模型能力，为用户提供智能对话与故事生成体验。
+                Google Play 累计下载量突破千万，是个人最成功的商业化项目。
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                <Tag><Cpu className="w-3 h-3" />React Native</Tag>
+                <Tag><Sparkles className="w-3 h-3" />LLM</Tag>
+                <Tag><Globe className="w-3 h-3" />Google Play</Tag>
+                <Tag><Users className="w-3 h-3" />千万用户</Tag>
+              </div>
+              <div className="flex gap-4">
+                <a href="https://play.google.com/store/apps/details?id=com.xverse.aistory" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-amber-400 hover:text-amber-300 transition-colors">
+                  <Globe className="w-4 h-4" />Google Play<ExternalLink className="w-3 h-3" />
+                </a>
+                <a href="https://sayloai.com" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-amber-300/70 hover:text-amber-200 transition-colors">
+                  <Globe className="w-4 h-4" />官网 sayloai.com<ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
             {/* Header */}
             <div className="p-5 rounded-xl border border-slate-800 bg-slate-900 mb-5">
               <div className="flex items-center gap-3 mb-3">
@@ -419,7 +452,7 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer className="border-t border-slate-800">
         <div className="max-w-2xl mx-auto px-5 py-6 flex items-center justify-between">
-          <p className="text-xs text-slate-700">© {new Date().getFullYear()} Saylo · Built with Next.js · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-500 transition-colors">粤ICP备2026057233号-1</a></p>
+          <p className="text-xs text-slate-700">© {new Date().getFullYear()} Andy · Built with Next.js · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-500 transition-colors">粤ICP备2026057233号-1</a></p>
           <a href="https://github.com/andy304yang" target="_blank" rel="noopener noreferrer"
             className="text-slate-700 hover:text-slate-400 transition-colors">
             <GitHubIcon className="w-4 h-4" />
