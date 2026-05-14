@@ -123,11 +123,11 @@ export default function Home() {
             Andy<span className="text-sky-400">.</span>
           </span>
           <div className="flex items-center gap-5 text-sm text-slate-500">
-            <button onClick={() => setTab("project")} className={`transition-colors hover:text-slate-200 ${tab === "project" ? "text-slate-200" : ""}`}>
-              开源项目
-            </button>
             <button onClick={() => setTab("posts")} className={`transition-colors hover:text-slate-200 ${tab === "posts" ? "text-slate-200" : ""}`}>
               博客
+            </button>
+            <button onClick={() => setTab("project")} className={`transition-colors hover:text-slate-200 ${tab === "project" ? "text-slate-200" : ""}`}>
+              项目
             </button>
             <a href="https://github.com/andy304yang" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-slate-200 transition-colors">
@@ -193,6 +193,47 @@ export default function Home() {
           ))}
         </div>
 
+        {/* ── Posts Tab ── */}
+        {tab === "posts" && (
+          <section className="pb-16 space-y-3">
+            {posts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+                <article className="flex flex-col gap-2.5 p-5 rounded-xl border border-slate-800 bg-slate-900 hover:border-slate-700 cursor-pointer transition-colors">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-semibold text-slate-100 group-hover:text-sky-400 transition-colors leading-snug text-[15px]">
+                      {post.title}
+                    </h3>
+                    <ArrowRight className="w-4 h-4 text-sky-500 flex-shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <p className="text-sm text-slate-500 leading-relaxed">{post.summary}</p>
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="flex flex-wrap gap-1.5">
+                      {post.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-slate-600 flex-shrink-0">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />{post.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />{post.readingTime}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
+
+            {/* Tech stack */}
+            <div className="pt-8">
+              <SectionLabel>技术栈</SectionLabel>
+              <div className="flex flex-wrap gap-2">
+                {["TypeScript", "React / Next.js", "Node.js", "FastAPI", "TanStack Query", "Tailwind CSS", "Docker", "GitHub Actions"]
+                  .map((t) => <Tag key={t}>{t}</Tag>)}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ── Project Tab ── */}
         {tab === "project" && (
           <section className="pb-16">
@@ -203,7 +244,7 @@ export default function Home() {
                   <Sparkles className="w-4 h-4 text-amber-400" />
                 </div>
                 <div>
-                  <h2 className="font-bold text-slate-100">Saylo AI <span className="text-xs bg-amber-900 text-amber-200 px-1.5 py-0.5 rounded ml-1">千万下载量</span></h2>
+                  <h2 className="font-bold text-slate-100">Saylo AI <span className="text-xs bg-amber-900 text-amber-200 px-1.5 py-0.5 rounded ml-1">累计下载量超千万</span></h2>
                   <p className="text-xs text-amber-300/70">AI Story App · Google Play 热门应用</p>
                 </div>
               </div>
@@ -215,7 +256,7 @@ export default function Home() {
                 <Tag><Cpu className="w-3 h-3" />React Native</Tag>
                 <Tag><Sparkles className="w-3 h-3" />LLM</Tag>
                 <Tag><Globe className="w-3 h-3" />Google Play</Tag>
-                <Tag><Users className="w-3 h-3" />千万级下载量</Tag>
+                <Tag><Users className="w-3 h-3" />百万级用户</Tag>
               </div>
               <div className="flex gap-4">
                 <a href="https://play.google.com/store/apps/details?id=com.xverse.aistory" target="_blank" rel="noopener noreferrer"
@@ -407,47 +448,6 @@ export default function Home() {
           </section>
         )}
       </main>
-
-        {/* ── Posts Tab ── */}
-        {tab === "posts" && (
-          <section className="pb-16 space-y-3">
-            {posts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-                <article className="flex flex-col gap-2.5 p-5 rounded-xl border border-slate-800 bg-slate-900 hover:border-slate-700 cursor-pointer transition-colors">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-semibold text-slate-100 group-hover:text-sky-400 transition-colors leading-snug text-[15px]">
-                      {post.title}
-                    </h3>
-                    <ArrowRight className="w-4 h-4 text-sky-500 flex-shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                  <p className="text-sm text-slate-500 leading-relaxed">{post.summary}</p>
-                  <div className="flex items-center justify-between pt-1">
-                    <div className="flex flex-wrap gap-1.5">
-                      {post.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-slate-600 flex-shrink-0">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />{post.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />{post.readingTime}
-                      </span>
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
-
-            {/* Tech stack */}
-            <div className="pt-8">
-              <SectionLabel>技术栈</SectionLabel>
-              <div className="flex flex-wrap gap-2">
-                {["TypeScript", "React / Next.js", "Node.js", "FastAPI", "TanStack Query", "Tailwind CSS", "Docker", "GitHub Actions"]
-                  .map((t) => <Tag key={t}>{t}</Tag>)}
-              </div>
-            </div>
-          </section>
-        )}
 
       {/* ── Footer ── */}
       <footer className="border-t border-slate-800">
