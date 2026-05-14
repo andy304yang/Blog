@@ -172,6 +172,18 @@ function renderMarkdown(content: string): React.ReactNode[] {
       continue;
     }
 
+    // image
+    if (line.trim().match(/^!\[.*?\]\(.*?\)$/)) {
+      const match = line.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (match) {
+        elements.push(
+          <img key={key++} src={match[2]} alt={match[1]} className="rounded-lg my-4 max-w-full" />
+        );
+        i++;
+        continue;
+      }
+    }
+
     // paragraph
     if (line.trim()) {
       const trimmed = line.trim();
