@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { posts } from "@/lib/posts";
 import {
   Package,
   Terminal,
@@ -70,37 +72,9 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* ---------- data ---------- */
+import { posts } from "@/lib/posts";
 
-const posts = [
-  {
-    slug: "qxun-api-generator-intro",
-    title: "从零打造一个 Swagger → TypeScript 代码生成器",
-    summary:
-      "分享 qxun-api-generator 的设计思路：如何解析 OpenAPI 协议、生成 TanStack Query hooks，以及让 AI Agent 能读懂接口语义。",
-    date: "2024-12-01",
-    tags: ["TypeScript", "CLI", "OpenAPI"],
-    readingTime: "8 min",
-  },
-  {
-    slug: "type-safe-api-patterns",
-    title: "前端类型安全接口的三种姿势",
-    summary:
-      "对比手写类型、tRPC、以及代码生成三种方案的取舍，以及在大型团队中我们最终选择了什么。",
-    date: "2024-11-15",
-    tags: ["TypeScript", "架构"],
-    readingTime: "6 min",
-  },
-  {
-    slug: "ai-agent-context",
-    title: "让 AI Agent 读懂你的接口：结构化上下文实践",
-    summary:
-      "结合 Claude API 的实际经验，聊聊如何通过良好的类型定义和注释让 LLM 更准确地理解业务语义。",
-    date: "2024-10-28",
-    tags: ["AI Agent", "LLM", "工程化"],
-    readingTime: "5 min",
-  },
-];
+/* ---------- data ---------- */
 
 const features = [
   {
@@ -225,31 +199,30 @@ export default function Home() {
         {tab === "posts" && (
           <section className="pb-16 space-y-3">
             {posts.map((post) => (
-              <article
-                key={post.slug}
-                className="group flex flex-col gap-2.5 p-5 rounded-xl border border-slate-800 bg-slate-900 hover:border-slate-700 cursor-pointer transition-colors"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-semibold text-slate-100 group-hover:text-sky-400 transition-colors leading-snug text-[15px]">
-                    {post.title}
-                  </h3>
-                  <ArrowRight className="w-4 h-4 text-sky-500 flex-shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <p className="text-sm text-slate-500 leading-relaxed">{post.summary}</p>
-                <div className="flex items-center justify-between pt-1">
-                  <div className="flex flex-wrap gap-1.5">
-                    {post.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+                <article className="flex flex-col gap-2.5 p-5 rounded-xl border border-slate-800 bg-slate-900 hover:border-slate-700 cursor-pointer transition-colors">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-semibold text-slate-100 group-hover:text-sky-400 transition-colors leading-snug text-[15px]">
+                      {post.title}
+                    </h3>
+                    <ArrowRight className="w-4 h-4 text-sky-500 flex-shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-slate-600 flex-shrink-0">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />{post.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />{post.readingTime}
-                    </span>
+                  <p className="text-sm text-slate-500 leading-relaxed">{post.summary}</p>
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="flex flex-wrap gap-1.5">
+                      {post.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-slate-600 flex-shrink-0">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />{post.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />{post.readingTime}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             ))}
 
             {/* Tech stack */}
