@@ -178,7 +178,7 @@ export default function Home() {
 
         {/* ── Tab Toggle ── */}
         <div className="flex gap-1 mt-7 mb-6 p-1 rounded-lg bg-slate-900 w-fit">
-          {(["posts", "project"] as const).map((t) => (
+          {(["project", "posts"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
