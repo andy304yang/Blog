@@ -110,7 +110,7 @@ const features = [
 /* ---------- page ---------- */
 
 export default function Home() {
-  const [tab, setTab] = useState<"posts" | "project">("posts");
+  const [tab, setTab] = useState<"posts" | "project">("project");
   const [activeFeature, setActiveFeature] = useState(0);
 
   return (
