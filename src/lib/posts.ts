@@ -21,8 +21,12 @@ export const posts: Post[] = [
 ## 效果展示
 
 - 无需写代码，飞书机器人对话 复制figma对应URL 改项目样式并且部署，进行自动化测试
+    - ![效果展示](https://img.cdn.apipost.cn/upload/user/1171325/logo/c0b76a38-246b-4d17-ba04-433a025eb1d9.png)
 
 ### agent完成效果展示
+
+    - ![agent效果1](https://img.cdn.apipost.cn/upload/user/1171325/logo/9daa71f3-651d-49e7-a423-0db057fc13be.png)
+    - ![agent效果2](https://img.cdn.apipost.cn/upload/user/1171325/logo/be2c446e-c4d3-4df1-8c73-c54fb9188694.png)
 
 实测这种简单的样式需求改动，agent已经能自动化完成，并且给出测试报告。
 
@@ -110,6 +114,8 @@ export const posts: Post[] = [
 
 ### 3.1 代码管理 + 部署
 
+![代码管理+部署](https://img.cdn.apipost.cn/upload/user/1171325/logo/72589c25-43cb-4c32-8eb8-6526c392be07.png)
+
 | Skill | 用途 |
 |-------|------|
 | \`repo-management\` | 仓库清单，记录所有 GitHub 仓库的本地路径、部署方式、服务器信息 |
@@ -149,6 +155,8 @@ swagger-typescript-api 生成 *.api.ts
 \`\`\`
 
 ### 3.4 自动化测试
+
+![自动化测试](https://img.cdn.apipost.cn/upload/user/1171325/logo/6f34c115-0f6f-45ec-8a83-3703778c9de4.png)
 
 | Skill | 用途 |
 |-------|------|
