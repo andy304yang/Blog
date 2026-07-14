@@ -1,464 +1,299 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { posts } from "@/lib/posts";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
-  Package,
-  Terminal,
-  Sparkles,
-  Layers,
-  FileCode,
-  Zap,
-  Shield,
-  BookOpen,
-  ExternalLink,
-  Code2,
-  Users,
-  Cpu,
-  Globe,
-  Calendar,
+  ArrowLeft,
   ArrowRight,
-  Rss,
-  Clock,
+  ArrowUpRight,
+  BookOpen,
+  Github,
+  Mail,
+  MapPin,
+  Menu,
+  X,
 } from "lucide-react";
 
-function GitHubIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-    </svg>
-  );
-}
-
-/* ---------- shared ---------- */
-
-function Tag({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-sky-950 text-sky-400 border border-sky-900">
-      {children}
-    </span>
-  );
-}
-
-function Card({
-  children,
-  className = "",
-  onClick,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-}) {
-  return (
-    <div
-      className={`rounded-xl border border-slate-800 bg-slate-900 p-5 ${className}`}
-      onClick={onClick}
-    >
-      {children}
-    </div>
-  );
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-2 mb-5">
-      <span className="w-1 h-4 rounded-full bg-sky-500 block" />
-      <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">
-        {children}
-      </h2>
-    </div>
-  );
-}
-
-/* ---------- data ---------- */
-
-const features = [
+const experiences = [
   {
-    icon: <Layers className="w-4 h-4" />,
-    title: "Swagger → TypeScript 类型",
-    desc: "解析 OpenAPI 3.0 / Swagger 2.0，自动生成完整 TypeScript 类型定义",
-  },
-  {
-    icon: <FileCode className="w-4 h-4" />,
-    title: "TanStack Query 集成",
-    desc: "生成接口自动封装为 hooks，支持缓存、重试、轮询等高级特性",
-  },
-  {
-    icon: <Shield className="w-4 h-4" />,
-    title: "错误码自动映射",
-    desc: "配置业务错误码体系，生成统一的错误处理逻辑",
-  },
-  {
-    icon: <Sparkles className="w-4 h-4" />,
-    title: "Agent 可阅读的协议",
-    desc: "高度结构化，LLM Agent 可快速理解接口语义",
-  },
-  {
-    icon: <Zap className="w-4 h-4" />,
-    title: "多项目快速复用",
-    desc: "一次配置，通过 npm 包分发在各项目间保持协议同步",
-  },
-  {
-    icon: <Cpu className="w-4 h-4" />,
-    title: "高度可定制",
-    desc: "支持自定义拦截器、响应转换、全局错误处理",
+    period: "2022.07 — 2026.02",
+    title: "元象唯思控股（深圳）有限公司",
+    role: "前端开发工程师 · SAYLO AI / XVERSE",
+    copy: "从 0 到 1 参与 Saylo AI，覆盖 React Native App、Next.js 官网、流式对话、音视频、AIGC 内容与支付商业化；同时建设类型安全接口生成、Storybook 组件资产和 Agent 自动化交付链路。",
   },
 ];
 
-/* ---------- page ---------- */
+const strengths = [
+  { title: "qxun-api-generator", mark: "01 / NPM", copy: "我发布的 npm 工具，把 Swagger / OpenAPI 协议生成类型安全的 TypeScript 接口文件。" },
+  { title: "Swagger → Types", mark: "02 / OPENAPI", copy: "解析接口定义、数据模型与错误码，让前后端和 Agent 使用同一份协议。" },
+  { title: "TanStack Query", mark: "03 / HOOKS", copy: "在生成链路中补齐 Query / Mutation Hooks，减少重复封装与联调成本。" },
+  { title: "Agent Skill", mark: "04 / AI DX", copy: "把内部接口规范生成 Agent 可读的 Skill，让 Codex 能按团队规范直接实现业务。" },
+];
 
 export default function Home() {
-  const [tab, setTab] = useState<"posts" | "project">("project");
-  const [activeFeature, setActiveFeature] = useState(0);
+  const [activeTab, setActiveTab] = useState<"portfolio" | "blog">("portfolio");
+  const [menuOpen, setMenuOpen] = useState(false);
+  useScrollReveal([activeTab]);
+
+  const openSection = (id: string) => {
+    setActiveTab("portfolio");
+    setMenuOpen(false);
+    window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 0);
+  };
+
+  const openBlog = () => {
+    setActiveTab("blog");
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-slate-200">
+    <main className="portfolio-site">
+      <header className="nav-pill">
+        <button className="brand-mark" type="button" onClick={() => openSection("home")} aria-label="返回作品集首页">
+          AY<span>©26</span>
+        </button>
+        <nav className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="主导航">
+          <button type="button" onClick={() => openSection("about")}>介绍</button>
+          <button type="button" onClick={() => openSection("projects")}>项目</button>
+          <button type="button" onClick={() => openSection("experience")}>经历</button>
+          <button
+            id="blog-tab"
+            type="button"
+            className={activeTab === "blog" ? "is-active" : ""}
+            onClick={openBlog}
+            aria-selected={activeTab === "blog"}
+          >
+            博客
+          </button>
+          <button type="button" onClick={() => openSection("contact")}>联系我</button>
+        </nav>
+        <a className="github-pill" href="https://github.com/andy304yang" target="_blank" rel="noreferrer">
+          <Github aria-hidden="true" /> GitHub
+        </a>
+        <button className="menu-button" type="button" aria-label="切换导航" onClick={() => setMenuOpen((value) => !value)}>
+          {menuOpen ? <X /> : <Menu />}
+        </button>
+      </header>
 
-      {/* ── Nav ── */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-slate-800 bg-[#0a0f1a]/90 backdrop-blur-md">
-        <div className="max-w-2xl mx-auto px-5 h-13 flex items-center justify-between" style={{ height: 52 }}>
-          <span className="font-bold text-slate-100 tracking-tight">
-            Andy<span className="text-sky-400">.</span>
-          </span>
-          <div className="flex items-center gap-5 text-sm text-slate-500">
-            <button onClick={() => setTab("posts")} className={`transition-colors hover:text-slate-200 ${tab === "posts" ? "text-slate-200" : ""}`}>
-              博客
-            </button>
-            <button onClick={() => setTab("project")} className={`transition-colors hover:text-slate-200 ${tab === "project" ? "text-slate-200" : ""}`}>
-              项目
-            </button>
-            <a href="https://github.com/andy304yang" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-slate-200 transition-colors">
-              <GitHubIcon className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-2xl mx-auto px-5 pt-20">
-
-        {/* ── Hero ── */}
-        <section className="py-12 border-b border-slate-800">
-          <div className="flex items-start gap-5">
-            <Image
-              src="/andy.jpeg"
-              alt="Andy"
-              width={64}
-              height={64}
-              className="rounded-2xl object-cover object-top flex-shrink-0"
-              style={{ width: 64, height: 64 }}
-            />
-            <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-bold text-slate-100 mb-1">你好，我是 Andy</h1>
-              <p className="text-sm text-slate-500 mb-3">
-                全栈开发工程师 · 开源工具作者 · AI Agent 探索者
-              </p>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                专注于前端工程化、API 类型安全与 AI Agent 开发。
-                喜欢造轮子，坚信好的工具能解放生产力。
-                这里记录我的技术思考和开源经历。
-              </p>
-              <div className="flex gap-2 mt-4">
-                <a href="https://github.com/andy304yang" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors">
-                  <GitHubIcon className="w-3.5 h-3.5" />
-                  andy304yang
-                </a>
-                <a href="https://www.npmjs.com/package/qxun-api-generator" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-sky-950 hover:bg-sky-900 text-sky-400 border border-sky-900 transition-colors">
-                  <Package className="w-3.5 h-3.5" />
-                  npm
-                </a>
+      {activeTab === "portfolio" ? (
+        <div className="portfolio-view">
+          <section id="home" className="hero-stage">
+            <div className="hero-frame">
+              <video className="hero-video" autoPlay muted loop playsInline poster="/andy-room-tv-poster.jpg">
+                <source src="/andy-room-tv-loop.mp4?v=portfolio-v1" type="video/mp4" />
+              </video>
+              <div className="hero-noise" aria-hidden="true" />
+              <div className="hero-bottom-mask" aria-hidden="true" />
+              <div className="hero-content">
+                <div className="hero-title-block">
+                  <h1 aria-label="Andy">
+                    <span>Andy</span><i aria-hidden="true" />
+                  </h1>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* ── Tab Toggle ── */}
-        <div className="flex gap-1 mt-7 mb-6 p-1 rounded-lg bg-slate-900 w-fit">
-          {(["project", "posts"] as const).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                tab === t
-                  ? "bg-slate-700 text-slate-100 shadow-sm"
-                  : "text-slate-500 hover:text-slate-300"
-              }`}
-            >
-              {t === "posts" ? <><Rss className="w-3.5 h-3.5" /> 博客文章</> : <><Terminal className="w-3.5 h-3.5" /> 开源项目</>}
-            </button>
-          ))}
+          <section id="about" className="section about-section reveal-block" data-reveal>
+            <div className="about-card">
+              <div className="retro-tabs" aria-hidden="true">
+                <span>介绍</span><span>项目</span><span>经历</span><span>博客</span><span>联系我</span><b>07/2026 · SHENZHEN</b>
+              </div>
+              <div className="about-layout">
+                <div className="about-copy">
+                  <p className="section-label">01 / ABOUT</p>
+                  <h2>about <em>me!</em></h2>
+                  <h3>Hello! 我是 Andy.</h3>
+                  <p className="about-intro">
+                    全栈开发工程师、AI 产品构建者与开源工具作者。专注前端工程化、类型安全、AI Agent 和从 0 到 1 的产品落地。
+                    我喜欢把复杂问题拆成清晰路径，再把它做成真正有人使用的东西。
+                  </p>
+                  <div className="focus-block">
+                    <span>FOCUS</span>
+                    <strong>AI × PRODUCT × ENGINEERING</strong>
+                    <small>Shenzhen / Remote collaboration</small>
+                  </div>
+                  <div className="metric-grid">
+                    <div><strong>10M+</strong><span>产品累计下载</span></div>
+                    <div><strong>0→1</strong><span>完整产品落地</span></div>
+                    <div><strong>AI</strong><span>Agent 与模型应用</span></div>
+                    <div><strong>OSS</strong><span>开源工具维护</span></div>
+                  </div>
+                </div>
+                <div className="about-media">
+                  <div className="retro-window portrait-window reveal-block" data-reveal>
+                    <div className="window-bar"><span>MEET-ANDY.EXE</span><b>×</b></div>
+                    <Image src="/andy.jpeg" alt="Andy Yang" width={680} height={820} priority />
+                  </div>
+                  <div className="retro-window socials-window reveal-block" data-reveal>
+                    <div className="window-bar"><span>SOCIALS</span><b>×</b></div>
+                    <a href="mailto:andy304yang@gmail.com"><Mail />andy304yang@gmail.com</a>
+                    <a href="https://github.com/andy304yang" target="_blank" rel="noreferrer"><Github />github.com/andy304yang</a>
+                    <span><MapPin />Shenzhen / Remote</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="projects" className="section projects-section">
+            <div className="section-shell">
+              <div className="split-title projects-title reveal-block" data-reveal data-reveal-threshold="0.2">
+                <span>看看我做了</span><em>什么</em>
+              </div>
+
+              <article className="saylo-case reveal-block" data-reveal data-reveal-threshold="0.16">
+                <div className="case-heading">
+                  <div>
+                    <p>01 / FLAGSHIP PRODUCT</p>
+                    <h3>Saylo AI</h3>
+                    <span>AI 角色扮演、互动剧情、故事视频与漫画生成的一体化内容产品。</span>
+                  </div>
+                  <a href="https://sayloai.com" target="_blank" rel="noreferrer" aria-label="打开 Saylo 官网">
+                    查看官网 <ArrowUpRight />
+                  </a>
+                </div>
+
+                <div className="saylo-overview reveal-block" data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties}>
+                  <Image src="/saylo-product-overview.png" alt="Saylo AI 产品介绍与全球发布数据" width={1080} height={607} />
+                </div>
+
+                <div className="saylo-metrics" aria-label="Saylo 产品数据">
+                  <div className="reveal-block" data-reveal style={{ "--reveal-delay": "160ms" } as React.CSSProperties}><strong>10M+</strong><span>全平台累计下载</span></div>
+                  <div className="reveal-block" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}><strong>5M+</strong><span>Google Play 下载</span></div>
+                  <div className="reveal-block" data-reveal style={{ "--reveal-delay": "360ms" } as React.CSSProperties}><strong>4.4 ★</strong><span>6 万+ 用户评价</span></div>
+                  <div className="reveal-block" data-reveal style={{ "--reveal-delay": "460ms" } as React.CSSProperties}><strong>2025</strong><span>中国 AI 年度产品</span></div>
+                </div>
+
+                <div className="saylo-gallery">
+                  <figure className="saylo-award reveal-block" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
+                    <Image src="/saylo-award-2025.png" alt="Saylo 入选 2025 中国 AI 年度产品榜单" width={1080} height={467} />
+                    <figcaption>2025 中国 AI 年度产品 · AI 产品榜</figcaption>
+                  </figure>
+                  <figure className="saylo-tall reveal-block" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
+                    <Image src="/saylo-anime-drama.png" alt="Saylo Anime Drama 产品界面" width={1329} height={2880} />
+                    <figcaption>Anime Drama · 内容发现</figcaption>
+                  </figure>
+                  <figure className="saylo-tall reveal-block" data-reveal style={{ "--reveal-delay": "400ms" } as React.CSSProperties}>
+                    <Image src="/saylo-story-comics.png" alt="Saylo 故事视频与漫画生成功能" width={460} height={995} />
+                    <figcaption>Story Videos & Comics · AIGC 创作</figcaption>
+                  </figure>
+                </div>
+
+                <div className="case-notes reveal-block" data-reveal>
+                  <p>我参与的部分</p>
+                  <div>
+                    <span>React Native App</span><span>Next.js 官网</span><span>SSE 流式对话</span>
+                    <span>音视频与 TTS 缓存</span><span>支付商业化</span><span>Agent 工程化</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="metaverse-case reveal-block" data-reveal data-reveal-threshold="0.16">
+                <div className="metaverse-copy">
+                  <p>02 / XVERSE METAVERSE</p>
+                  <h3>元宇宙互动内容</h3>
+                  <span>围绕沉浸式 VR 空间互动影院、AIGC 视觉内容与跨端体验，参与把实时互动能力带进线下展会与大众传播场景。</span>
+                  <div className="case-tags"><b>VR SPACE</b><b>AIGC</b><b>INTERACTIVE WEB</b><b>CROSS-PLATFORM</b></div>
+                </div>
+                <div className="metaverse-image reveal-block" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
+                  <Image src="/xverse-metaverse-cctv.png" alt="元象元宇宙互动项目多次登上央视报道" width={1000} height={1141} />
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="experience" className="section experience-section">
+            <div className="section-shell">
+              <div className="split-title reveal-block" data-reveal><span>我的工作</span><em>经历</em></div>
+              <div className="timeline">
+                {experiences.map((item, index) => (
+                  <article
+                    key={item.title}
+                    className="timeline-item reveal-block"
+                    data-reveal
+                    style={{ "--reveal-delay": `${index * 180}ms` } as React.CSSProperties}
+                  >
+                    <div className="timeline-number">0{index + 1}</div>
+                    <div className="timeline-company">
+                      <span>{item.period}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.role}</p>
+                    </div>
+                    <p className="timeline-copy">{item.copy}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="strengths-section">
+            <div className="strengths-board">
+              <div className="split-title reveal-block" data-reveal><span>我的开源</span><em>工程工具</em></div>
+              <div className="strength-grid">
+                {strengths.map((item, index) => (
+                  <article
+                    key={item.title}
+                    className="reveal-block"
+                    data-reveal
+                    style={{ "--card-index": index, "--reveal-delay": `${index * 80}ms` } as React.CSSProperties}
+                  >
+                    <span>{item.mark}</span><h3>{item.title}</h3><p>{item.copy}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="contact" className="contact-section">
+            <div className="contact-copy reveal-block" data-reveal>
+              <p>INQUIRIES</p>
+              <h2>一起做更好玩的 <em>东西</em></h2>
+              <span>如果你正在构建 AI 产品、开发者工具或复杂的跨端体验，欢迎来聊聊。</span>
+              <div className="contact-actions">
+                <a className="portfolio-button" href="mailto:andy304yang@gmail.com">发送邮件 <span><ArrowRight /></span></a>
+                <a className="portfolio-button" href="https://github.com/andy304yang" target="_blank" rel="noreferrer">查看 GitHub <span><ArrowUpRight /></span></a>
+              </div>
+            </div>
+            <footer><span>ANDY YANG · FULL-STACK ENGINEER</span><span>© 2026 · SHENZHEN</span></footer>
+          </section>
         </div>
-
-        {/* ── Posts Tab ── */}
-        {tab === "posts" && (
-          <section className="pb-16 space-y-3">
-            {posts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-                <article className="flex flex-col gap-2.5 p-5 rounded-xl border border-slate-800 bg-slate-900 hover:border-slate-700 cursor-pointer transition-colors">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-semibold text-slate-100 group-hover:text-sky-400 transition-colors leading-snug text-[15px]">
-                      {post.title}
-                    </h3>
-                    <ArrowRight className="w-4 h-4 text-sky-500 flex-shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                  <p className="text-sm text-slate-500 leading-relaxed">{post.summary}</p>
-                  <div className="flex items-center justify-between pt-1">
-                    <div className="flex flex-wrap gap-1.5">
-                      {post.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-slate-600 flex-shrink-0">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />{post.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />{post.readingTime}
-                      </span>
-                    </div>
-                  </div>
-                </article>
+      ) : (
+        <section className="blog-view" aria-labelledby="blog-title">
+          <div className="blog-hero reveal-block" data-reveal>
+            <button type="button" onClick={() => openSection("home")}><ArrowLeft /> 返回作品集</button>
+            <p>NOTES · DOCUMENTS · ENGINEERING</p>
+            <h1 id="blog-title"><span>Blog</span><em>notes</em></h1>
+            <small>记录 AI 产品、前端工程、React Native 和自动化工作流。</small>
+          </div>
+          <div className="blog-list">
+            {posts.map((post, index) => (
+              <Link
+                href={`/blog/${post.slug}`}
+                key={post.slug}
+                className="post-row reveal-block"
+                data-reveal
+                style={{ "--reveal-delay": `${Math.min(index, 4) * 70}ms` } as React.CSSProperties}
+              >
+                <span className="post-number">{String(index + 1).padStart(2, "0")}</span>
+                <div className="post-copy">
+                  <p>{post.tags.slice(0, 3).join(" · ")}</p>
+                  <h2>{post.title}</h2>
+                  <span>{post.summary}</span>
+                </div>
+                <div className="post-meta">
+                  <time>{post.date}</time><small>{post.readingTime}</small><ArrowUpRight />
+                </div>
               </Link>
             ))}
-
-            {/* Tech stack */}
-            <div className="pt-8">
-              <SectionLabel>技术栈</SectionLabel>
-              <div className="flex flex-wrap gap-2">
-                {["TypeScript", "React / Next.js", "Node.js", "FastAPI", "TanStack Query", "Tailwind CSS", "Docker", "GitHub Actions"]
-                  .map((t) => <Tag key={t}>{t}</Tag>)}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ── Project Tab ── */}
-        {tab === "project" && (
-          <section className="pb-16">
-            {/* Saylo AI 项目 */}
-            <div className="p-5 rounded-xl border border-slate-800 bg-gradient-to-br from-amber-950 to-orange-950 mb-5">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-amber-900/50 border border-amber-800 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                </div>
-                <div>
-                  <h2 className="font-bold text-slate-100">Saylo AI <span className="text-xs bg-amber-900 text-amber-200 px-1.5 py-0.5 rounded ml-1">累计下载量超千万</span></h2>
-                  <p className="text-xs text-amber-300/70">AI Story App · Google Play 热门应用</p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-300 leading-relaxed mb-4">
-                自主研发的 AI 对话故事应用，集成先进的大语言模型能力，为用户提供智能对话与故事生成体验。
-                Google Play 累计下载量突破千万，是个人最成功的商业化项目。
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                <Tag><Cpu className="w-3 h-3" />React Native</Tag>
-                <Tag><Sparkles className="w-3 h-3" />LLM</Tag>
-                <Tag><Globe className="w-3 h-3" />Google Play</Tag>
-                <Tag><Users className="w-3 h-3" />百万级用户</Tag>
-              </div>
-              <div className="flex gap-4">
-                <a href="https://play.google.com/store/apps/details?id=com.xverse.aistory" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-amber-400 hover:text-amber-300 transition-colors">
-                  <Globe className="w-4 h-4" />Google Play<ExternalLink className="w-3 h-3" />
-                </a>
-                <a href="https://sayloai.com" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-amber-300/70 hover:text-amber-200 transition-colors">
-                  <Globe className="w-4 h-4" />官网 sayloai.com<ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-
-            {/* Header */}
-            <div className="p-5 rounded-xl border border-slate-800 bg-slate-900 mb-5">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-sky-950 border border-sky-900 flex items-center justify-center flex-shrink-0">
-                  <Terminal className="w-4 h-4 text-sky-400" />
-                </div>
-                <div>
-                  <h2 className="font-bold text-slate-100">qxun-api-generator</h2>
-                  <p className="text-xs text-slate-500">Swagger 协议 → 前端类型安全接口</p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                将 Swagger / OpenAPI 协议自动生成前端 TypeScript 接口文件的 CLI 工具。
-                结合 TanStack Query 和错误码映射，生成 Agent 可阅读的接口协议。
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                <Tag><Code2 className="w-3 h-3" />TypeScript</Tag>
-                <Tag><Globe className="w-3 h-3" />OpenAPI 3.0</Tag>
-                <Tag><Users className="w-3 h-3" />TanStack Query</Tag>
-                <Tag><BookOpen className="w-3 h-3" />CLI</Tag>
-                <Tag><Sparkles className="w-3 h-3" />AI-Agent Ready</Tag>
-              </div>
-              <div className="flex gap-4">
-                <a href="https://www.npmjs.com/package/qxun-api-generator" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-sky-400 hover:text-sky-300 transition-colors">
-                  <Package className="w-4 h-4" />npm<ExternalLink className="w-3 h-3" />
-                </a>
-                <a href="https://github.com/andy304yang/qxun-api-generator" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                  <GitHubIcon className="w-4 h-4" />Source Code<ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-
-            {/* Dream 项目 */}
-            <div className="p-5 rounded-xl border border-slate-800 bg-slate-900 mb-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-900 flex items-center justify-center flex-shrink-0">
-                  <Layers className="w-4 h-4 text-emerald-400" />
-                </div>
-                <div>
-                  <h2 className="font-bold text-slate-100">Dream — Excel 智能处理</h2>
-                  <p className="text-xs text-slate-500">AI 驱动的 Excel 数据分析平台</p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                基于 MiniMax-M2 大模型对 Excel/CSV 文件进行智能解析、转换与数据分析。
-                支持多文件批量处理、NATURAL LANGUAGE 查询、自动生成图表报告。
-                腾讯云 81.71.29.84 独立部署，支持私有化定制。
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                <Tag><Cpu className="w-3 h-3" />Next.js 15</Tag>
-                <Tag><FileCode className="w-3 h-3" />FastAPI</Tag>
-                <Tag><Sparkles className="w-3 h-3" />MiniMax-M2</Tag>
-                <Tag><Shield className="w-3 h-3" />私有化部署</Tag>
-              </div>
-              <div className="flex gap-4">
-                <a href="https://mclarenai.cn/dream/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
-                  <Globe className="w-4 h-4" />在线体验<ExternalLink className="w-3 h-3" />
-                </a>
-                <a href="https://github.com/andy304yang/dream" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                  <GitHubIcon className="w-4 h-4" />前端源码<ExternalLink className="w-3 h-3" />
-                </a>
-                <a href="https://github.com/andy304yang/cos" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                  <GitHubIcon className="w-4 h-4" />后端源码<ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-
-            {/* Component 组件库 */}
-            <div className="p-5 rounded-xl border border-slate-800 bg-slate-900 mb-5">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-violet-950 border border-violet-900 flex items-center justify-center flex-shrink-0">
-                  <Layers className="w-4 h-4 text-violet-400" />
-                </div>
-                <div>
-                  <h2 className="font-bold text-slate-100">Component — React 组件库</h2>
-                  <p className="text-xs text-slate-500">Vite + React + Storybook 组件开发工作流</p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                基于 Vite 构建的 React 组件库，含完整 Storybook 文档、SVGR 图标管道、
-                Vitest 集成测试。提供可复用 UI 组件，支撑内部项目快速迭代。
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                <Tag><Code2 className="w-3 h-3" />React 18</Tag>
-                <Tag><FileCode className="w-3 h-3" />Vite</Tag>
-                <Tag><BookOpen className="w-3 h-3" />Storybook</Tag>
-                <Tag><Shield className="w-3 h-3" />Vitest</Tag>
-              </div>
-              <div className="flex gap-4">
-                <a href="https://mclarenai.cn/component/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-violet-400 hover:text-violet-300 transition-colors">
-                  <Globe className="w-4 h-4" />在线预览<ExternalLink className="w-3 h-3" />
-                </a>
-                <a href="https://github.com/andy304yang/Component" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                  <GitHubIcon className="w-4 h-4" />Source Code<ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-
-            {/* Features */}
-            <SectionLabel>核心功能</SectionLabel>
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              {features.map((f, i) => (
-                <Card
-                  key={i}
-                  className={`cursor-pointer transition-all hover:border-slate-700 ${activeFeature === i ? "border-sky-800 bg-sky-950/50" : ""}`}
-                  onClick={() => setActiveFeature(i)}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 text-sky-400 flex-shrink-0">{f.icon}</div>
-                    <div>
-                      <h3 className="font-medium text-slate-100 text-sm mb-1">{f.title}</h3>
-                      <p className="text-xs text-slate-500 leading-relaxed">{f.desc}</p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            {/* Code examples */}
-            <SectionLabel>快速上手</SectionLabel>
-            <div className="space-y-3">
-              <Card>
-                <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3">安装</p>
-                <pre className="code-block">
-<span className="cmt"># 全局安装</span>{"\n"}
-<span className="fn">npm</span> <span className="kw">install</span> -g qxun-api-generator{"\n\n"}
-<span className="cmt"># 或项目内安装</span>{"\n"}
-<span className="fn">npm</span> <span className="kw">install</span> --save-dev qxun-api-generator
-                </pre>
-              </Card>
-
-              <Card>
-                <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3">配置 qxun.config.ts</p>
-                <pre className="code-block">
-<span className="kw">import</span> {"{ "}<span className="typ">defineConfig</span>{" }"} <span className="kw">from</span> <span className="str">"qxun-api-generator"</span>;{"\n\n"}
-<span className="kw">export default</span> <span className="fn">defineConfig</span>{"({"}{"\n"}
-{"  "}<span className="var">specUrl</span>: <span className="str">"https://api.example.com/swagger.json"</span>,{"\n"}
-{"  "}<span className="var">outputDir</span>: <span className="str">"./src/api"</span>,{"\n"}
-{"  "}<span className="var">errorCodes</span>: {"{ "}401: <span className="str">"Unauthorized"</span>, 403: <span className="str">"Forbidden"</span>{" },"}{"\n"}
-{"})"}
-                </pre>
-              </Card>
-
-              <div className="grid grid-cols-2 gap-3">
-                <Card>
-                  <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3">运行</p>
-                  <pre className="code-block">
-<span className="fn">npx</span> qxun-api-generator{"\n\n"}
-<span className="cmt"># 输出结构</span>{"\n"}
-<span className="str">src/api/</span>{"\n"}
-{"  "}<span className="str">types.ts</span>   <span className="cmt">// 类型</span>{"\n"}
-{"  "}<span className="str">users.ts</span>   <span className="cmt">// 用户接口</span>{"\n"}
-{"  "}<span className="str">errors.ts</span>  <span className="cmt">// 错误码</span>
-                  </pre>
-                </Card>
-                <Card>
-                  <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3">使用</p>
-                  <pre className="code-block">
-<span className="kw">import</span> {"{ "}<span className="typ">useUserList</span>{" }"}{"\n"}
-{"  "}<span className="kw">from</span> <span className="str">"./api/users"</span>;{"\n\n"}
-<span className="kw">const</span> {"{ "}<span className="var">data</span>{" }"} = <span className="fn">useUserList</span>{"({"}{"\n"}
-{"  "}<span className="var">page</span>: 1,{"\n"}
-{"  "}<span className="var">pageSize</span>: 20,{"\n"}
-{"})"}
-                  </pre>
-                </Card>
-              </div>
-            </div>
-          </section>
-        )}
-      </main>
-
-      {/* ── Footer ── */}
-      <footer className="border-t border-slate-800">
-        <div className="max-w-2xl mx-auto px-5 py-6 flex items-center justify-between">
-          <p className="text-xs text-slate-700">© {new Date().getFullYear()} Andy · Built with Next.js · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-500 transition-colors">粤ICP备2026057233号-1</a></p>
-          <a href="https://github.com/andy304yang" target="_blank" rel="noopener noreferrer"
-            className="text-slate-700 hover:text-slate-400 transition-colors">
-            <GitHubIcon className="w-4 h-4" />
-          </a>
-        </div>
-      </footer>
-    </div>
+          </div>
+          <div className="blog-foot reveal-block" data-reveal><BookOpen /><span>{posts.length} 篇公开文档，持续更新中。</span></div>
+        </section>
+      )}
+    </main>
   );
 }

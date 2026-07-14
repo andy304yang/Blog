@@ -1,1 +1,9 @@
 node_modules
+.next/
+.codegraph/
+.superpowers/
+.DS_Store
+tmp/
+qa/
+design-qa.md
+tsconfig.tsbuildinfo

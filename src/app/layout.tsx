@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const SITE_URL = "https://mclarenai.cn";
-const SITE_NAME = "Saylo - 全栈开发工程师";
-const SITE_DESCRIPTION = "全栈开发工程师，专注于前端工程化、API 类型安全与 AI Agent 开发。造轮子，热爱开源。";
+const SITE_NAME = "Andy Yang — Full-stack Engineer";
+const SITE_DESCRIPTION = "Andy Yang 的个人网站：全栈开发、AI 产品、开源项目与技术博客。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: ["全栈开发", "前端工程化", "TypeScript", "API 类型安全", "AI Agent", "Saylo"],
+  keywords: ["Andy Yang", "全栈开发", "前端工程化", "TypeScript", "AI Agent", "开源项目"],
   openGraph: {
     type: "website",
     locale: "zh_CN",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f172a",
+  themeColor: "#050505",
 };
 
 export default function RootLayout({
