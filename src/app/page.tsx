@@ -33,6 +33,8 @@ const strengths = [
   { title: "Agent Skill", mark: "04 / AI DX", copy: "把内部接口规范生成 Agent 可读的 Skill，让 Codex 能按团队规范直接实现业务。" },
 ];
 
+const SAYLO_GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.xverse.aistory";
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"portfolio" | "blog">("portfolio");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -153,13 +155,13 @@ export default function Home() {
                     <h3>Saylo AI</h3>
                     <span>AI 角色扮演、互动剧情、故事视频与漫画生成的一体化内容产品。</span>
                   </div>
-                  <a href="https://sayloai.com" target="_blank" rel="noreferrer" aria-label="打开 Saylo 官网">
-                    查看官网 <ArrowUpRight />
-                  </a>
                 </div>
 
                 <div className="saylo-overview reveal-block" data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties}>
                   <Image src="/saylo-product-overview.png" alt="Saylo AI 产品介绍与全球发布数据" width={1080} height={607} />
+                  <a className="saylo-overview-link" href="https://sayloai.com" target="_blank" rel="noreferrer" aria-label="打开 Saylo 官网">
+                    查看官网 <ArrowUpRight />
+                  </a>
                 </div>
 
                 <div className="saylo-metrics" aria-label="Saylo 产品数据">
@@ -174,14 +176,18 @@ export default function Home() {
                     <Image src="/saylo-award-2025.png" alt="Saylo 入选 2025 中国 AI 年度产品榜单" width={1080} height={467} />
                     <figcaption>2025 中国 AI 年度产品 · AI 产品榜</figcaption>
                   </figure>
-                  <figure className="saylo-tall reveal-block" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
-                    <Image src="/saylo-anime-drama.png" alt="Saylo Anime Drama 产品界面" width={1329} height={2880} />
-                    <figcaption>Anime Drama · 内容发现</figcaption>
-                  </figure>
-                  <figure className="saylo-tall reveal-block" data-reveal style={{ "--reveal-delay": "400ms" } as React.CSSProperties}>
-                    <Image src="/saylo-story-comics.png" alt="Saylo 故事视频与漫画生成功能" width={460} height={995} />
-                    <figcaption>Story Videos & Comics · AIGC 创作</figcaption>
-                  </figure>
+                  <a className="saylo-gallery-link reveal-block" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties} href={SAYLO_GOOGLE_PLAY_URL} target="_blank" rel="noreferrer" aria-label="在 Google Play 查看 Saylo Anime Drama">
+                    <figure className="saylo-tall">
+                      <Image src="/saylo-anime-drama.png" alt="Saylo Anime Drama 产品界面" width={1329} height={2880} />
+                      <figcaption>Anime Drama · Google Play ↗</figcaption>
+                    </figure>
+                  </a>
+                  <a className="saylo-gallery-link reveal-block" data-reveal style={{ "--reveal-delay": "400ms" } as React.CSSProperties} href={SAYLO_GOOGLE_PLAY_URL} target="_blank" rel="noreferrer" aria-label="在 Google Play 查看 Saylo 故事视频与漫画功能">
+                    <figure className="saylo-tall">
+                      <Image src="/saylo-story-comics.png" alt="Saylo 故事视频与漫画生成功能" width={460} height={995} />
+                      <figcaption>Story Videos & Comics · Google Play ↗</figcaption>
+                    </figure>
+                  </a>
                 </div>
 
                 <div className="case-notes reveal-block" data-reveal>
@@ -202,6 +208,28 @@ export default function Home() {
                 </div>
                 <div className="metaverse-image reveal-block" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
                   <Image src="/xverse-metaverse-cctv.png" alt="元象元宇宙互动项目多次登上央视报道" width={1000} height={1141} />
+                </div>
+              </article>
+
+              <article className="stock-pet-case reveal-block" data-reveal data-reveal-threshold="0.16">
+                <div className="stock-pet-copy">
+                  <p>03 / PERSONAL PRODUCT</p>
+                  <h3>持仓宠物</h3>
+                  <span>一只住在 macOS 桌面、会随着持仓收益率切换情绪和动作的股票桌宠。把数字波动变成有反馈、有陪伴感的桌面体验。</span>
+                  <div className="case-tags">
+                    <b>SWIFTUI</b><b>MACOS</b><b>LIVE MARKET</b><b>FRAME ANIMATION</b>
+                  </div>
+                  <div className="stock-pet-actions">
+                    <Link href="/blog/stock-pet-desktop-companion">阅读开发总结 <ArrowRight /></Link>
+                    <a href="https://github.com/andy304yang/Pet-stock/releases/tag/v0.3.3" target="_blank" rel="noreferrer">下载 macOS 版 <ArrowUpRight /></a>
+                  </div>
+                </div>
+                <div className="stock-pet-media">
+                  <Image className="stock-pet-dashboard" src="/stock-pet/dashboard.jpg" alt="持仓宠物的行情与持仓主面板" width={980} height={700} />
+                  <div className="stock-pet-side-shots">
+                    <Image src="/stock-pet/debug-bear.jpg" alt="红绿北极熊在下跌收益率下的调试状态" width={420} height={652} />
+                    <Image src="/stock-pet/pet-store.jpg" alt="持仓宠物商城与多款动画宠物" width={440} height={560} />
+                  </div>
                 </div>
               </article>
             </div>
