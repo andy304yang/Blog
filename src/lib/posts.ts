@@ -103,7 +103,8 @@ export const posts: Post[] = [
 
 ## 下载与源码
 
-- [下载持仓宠物 v0.3.3（Apple Silicon）](https://github.com/andy304yang/Pet-stock/releases/tag/v0.3.3)
+- [下载持仓宠物 v0.4.1（Apple Silicon）](https://github.com/andy304yang/Pet-stock/releases/tag/v0.4.1)
+- [查看持仓宠物产品官网](/stock-pet)
 - [查看 GitHub 源码](https://github.com/andy304yang/Pet-stock)
 
 当前版本要求 macOS 15 或更高版本，仅提供 Apple Silicon 构建。项目用于行情展示与桌面陪伴，不构成任何投资建议。

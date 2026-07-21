@@ -220,8 +220,9 @@ export default function Home() {
                     <b>SWIFTUI</b><b>MACOS</b><b>LIVE MARKET</b><b>FRAME ANIMATION</b>
                   </div>
                   <div className="stock-pet-actions">
+                    <Link href="/stock-pet">查看产品官网 <ArrowRight /></Link>
                     <Link href="/blog/stock-pet-desktop-companion">阅读开发总结 <ArrowRight /></Link>
-                    <a href="https://github.com/andy304yang/Pet-stock/releases/tag/v0.3.3" target="_blank" rel="noreferrer">下载 macOS 版 <ArrowUpRight /></a>
+                    <a href="https://github.com/andy304yang/Pet-stock/releases/tag/v0.4.1" target="_blank" rel="noreferrer">下载 macOS 版 <ArrowUpRight /></a>
                   </div>
                 </div>
                 <div className="stock-pet-media">
