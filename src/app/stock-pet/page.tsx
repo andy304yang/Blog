@@ -4,339 +4,288 @@ import Link from "next/link";
 import {
   ArrowDownToLine,
   ArrowRight,
-  Bell,
+  BellRing,
   Bug,
   Check,
   ExternalLink,
   Github,
-  Heart,
   LineChart,
-  Monitor,
-  RefreshCw,
+  MonitorUp,
+  Play,
   ShieldCheck,
   Sparkles,
+  Zap,
 } from "lucide-react";
+import StockPetMotion from "./StockPetMotion";
+import LiveStockPet from "./LiveStockPet";
 import styles from "./page.module.css";
 
-const RELEASE_URL = "https://github.com/andy304yang/Pet-stock/releases/download/v0.4.1/StockPet-v0.4.1.dmg";
+const RELEASE_URL =
+  "https://github.com/andy304yang/Pet-stock/releases/download/v0.4.1/StockPet-v0.4.1.dmg";
 const REPOSITORY_URL = "https://github.com/andy304yang/Pet-stock";
 
 export const metadata: Metadata = {
-  title: "持仓宠物 — 会看盘、懂情绪的 macOS 桌宠",
+  title: "持仓宠物 — 让今天的收益有一点情绪",
   description:
-    "把持仓收益、当日分时、实时资讯和桌面宠物放在一起。涨了替你庆祝，跌了陪你难过，随时用小窗偷看股票。",
-  keywords: ["持仓宠物", "macOS 桌宠", "股票工具", "ETF", "分时行情", "SwiftUI"],
+    "一款免费的 macOS 桌面持仓工具。宠物会根据实时收益开心、膨胀、哭泣或缩小，还能查看当日分时、调试宠物素材并接收持仓资讯和异动提醒。",
+  keywords: ["持仓宠物", "macOS 桌宠", "股票工具", "ETF", "分时行情", "免费软件"],
   alternates: { canonical: "/stock-pet" },
   openGraph: {
-    title: "持仓宠物 — 让一只宠物替你盯盘",
-    description: "小窗看分时，宠物看收益，重要资讯实时提醒。",
+    title: "持仓宠物 — 让今天的收益有一点情绪",
+    description: "实时收益变成宠物情绪，持仓行情与重要提醒留在桌面。全部功能免费。",
     url: "/stock-pet",
-    images: [{ url: "/stock-pet/landing/portfolio-dashboard.webp", width: 1820, height: 1282 }],
+    images: [{ url: "/stock-pet/landing/portfolio-live.png", width: 1788, height: 1178 }],
   },
 };
 
-function MascotMark() {
+function Brand() {
   return (
-    <span className={styles.mascotMark} aria-hidden="true">
-      <i />
-      <i />
-      <b />
+    <span className={styles.brandInner}>
+      <Image src="/stock-pet/app-icon.png" alt="" width={40} height={40} priority />
+      <span>
+        <b>持仓宠物</b>
+        <small>STOCK PET</small>
+      </span>
     </span>
   );
 }
 
-function SparkLine({ variant = "up" }: { variant?: "up" | "soft" | "down" }) {
-  const paths = {
-    up: "M2 45 L13 42 L22 44 L31 35 L42 38 L52 29 L64 32 L74 21 L84 24 L95 11 L108 16 L120 4",
-    soft: "M2 31 L13 27 L25 34 L37 25 L49 32 L61 30 L73 39 L84 35 L96 26 L108 29 L120 20",
-    down: "M2 12 L14 16 L25 10 L37 25 L49 21 L61 33 L73 29 L85 43 L97 36 L108 47 L120 41",
-  };
-
+function SectionTitle({
+  index,
+  label,
+  title,
+  accent,
+  description,
+}: {
+  index: string;
+  label: string;
+  title: string;
+  accent: string;
+  description: string;
+}) {
   return (
-    <svg className={styles.sparkLine} viewBox="0 0 122 52" role="img" aria-label="当日分时曲线">
-      <path className={styles.sparkGuide} d="M1 29 H121" />
-      <path className={styles.sparkPath} pathLength="1" d={paths[variant]} />
-      <circle cx={variant === "down" ? 120 : 120} cy={variant === "up" ? 4 : variant === "soft" ? 20 : 41} r="3.5" />
-    </svg>
+    <div className={`${styles.sectionTitle} reveal-block`} data-reveal>
+      <p>{index} / {label}</p>
+      <h2>{title}<em>{accent}</em></h2>
+      <span>{description}</span>
+    </div>
   );
 }
 
 export default function StockPetLandingPage() {
   return (
     <main className={styles.site}>
+      <StockPetMotion />
       <header className={styles.navShell}>
         <Link className={styles.brand} href="/stock-pet" aria-label="持仓宠物首页">
-          <MascotMark />
-          <span>持仓宠物</span>
-          <small>STOCK PET</small>
+          <Brand />
         </Link>
-        <nav className={styles.navLinks} aria-label="产品导航">
-          <a href="#features">功能</a>
-          <a href="#emotion">宠物</a>
-          <a href="#debug">自定义</a>
-          <a href="#download">下载</a>
+        <nav className={styles.navLinks} aria-label="产品介绍导航">
+          <a href="#emotion">宠物情绪</a>
+          <a href="#market">持仓行情</a>
+          <a href="#custom">自由调试</a>
+          <a href="#alerts">资讯提醒</a>
         </nav>
         <a className={styles.navDownload} href={RELEASE_URL}>
           <ArrowDownToLine aria-hidden="true" />
-          <span>下载 macOS 版</span>
+          <span>免费下载</span>
         </a>
       </header>
 
       <section className={styles.hero}>
-        <div className={styles.heroGlow} aria-hidden="true" />
         <div className={styles.heroCopy}>
-          <div className={styles.eyebrow}>
-            <span className={styles.liveDot} />
-            macOS 桌面行情陪伴 · v0.4.1
+          <div className={styles.heroLead}>
+            <div className={styles.freeTag}><Sparkles />macOS 桌面持仓陪伴</div>
+            <h1>一只会看收益的桌宠。<span>现在，全部免费。</span></h1>
           </div>
-          <h1>
-            不必一直盯盘。
-            <span>让宠物替你看。</span>
-          </h1>
-          <p>
-            小窗看当日分时，宠物读懂你的实时收益。涨了替你庆祝，跌了陪你难过，重要消息第一时间提醒。
-          </p>
-          <div className={styles.heroActions}>
-            <a className={styles.primaryButton} href={RELEASE_URL}>
-              <ArrowDownToLine aria-hidden="true" />
-              免费下载 v0.4.1
-              <span>Apple Silicon</span>
-            </a>
-            <a className={styles.ghostButton} href={REPOSITORY_URL} target="_blank" rel="noreferrer">
-              <Github aria-hidden="true" />
-              GitHub 源码
-              <ExternalLink aria-hidden="true" />
-            </a>
-          </div>
-          <div className={styles.trustRow}>
-            <span><Check />开源</span>
-            <span><Check />数据仅保存在本机</span>
-            <span><Check />macOS 15+</span>
-          </div>
-        </div>
-
-        <div className={styles.heroProduct} aria-label="持仓宠物主界面展示">
-          <div className={styles.productHalo} aria-hidden="true" />
-          <div className={styles.windowFrame}>
-            <div className={styles.windowTopbar}>
-              <div><span /><span /><span /></div>
-              <b>持仓行情</b>
-              <small>每 2 秒刷新</small>
+          <div className={styles.heroDetails}>
+            <p>
+              持仓宠物把冰冷的涨跌变成桌面上的陪伴。赚了，它替你开心、跳跃、慢慢膨胀；亏了，它会哭泣、变小，安静陪你度过波动。
+            </p>
+            <div className={styles.heroActions}>
+              <a className={styles.primaryButton} href={RELEASE_URL}>
+                <ArrowDownToLine />免费下载 v0.4.1
+                <span>Apple Silicon</span>
+              </a>
+              <a className={styles.secondaryButton} href="#market">
+                <Play />查看产品功能
+              </a>
             </div>
-            <Image
-              src="/stock-pet/landing/portfolio-dashboard.webp"
-              alt="持仓宠物完整行情面板，展示指数、持仓市值、收益和当日分时曲线"
-              width={1820}
-              height={1282}
-              priority
-            />
-          </div>
-          <div className={`${styles.floatingCard} ${styles.profitCard}`}>
-            <span>今日收益</span>
-            <strong>+1.13%</strong>
-            <SparkLine />
-          </div>
-          <div className={`${styles.floatingCard} ${styles.refreshCard}`}>
-            <RefreshCw />
-            <div><strong>行情已更新</strong><span>刚刚</span></div>
-          </div>
-        </div>
-
-        <div className={styles.heroTicker} aria-label="产品能力">
-          <span>当日分时</span><i />
-          <span>收益情绪</span><i />
-          <span>实时通知</span><i />
-          <span>宠物自定义</span><i />
-          <span>小窗置顶</span>
-        </div>
-      </section>
-
-      <section id="features" className={styles.introSection}>
-        <div className={styles.sectionHeading}>
-          <p>01 / GLANCEABLE MARKET</p>
-          <h2>该知道的行情，<em>一眼就够。</em></h2>
-          <span>把“看一眼”和“认真看盘”拆成两种状态。忙的时候只留一扇小窗，需要时再展开完整持仓。</span>
-        </div>
-
-        <div className={styles.glanceGrid}>
-          <article className={styles.compactFeature}>
-            <div className={styles.featureNumber}>01</div>
-            <div className={styles.featureCopy}>
-              <div className={styles.iconChip}><LineChart /></div>
-              <p>小窗偷看</p>
-              <h3>每只股票的当日分时，始终在手边。</h3>
-              <span>窗口可以缩得很小并保持置顶，继续显示股票名称、持仓总值、收益率和实时分时曲线。</span>
-              <ul>
-                <li><Check />四角等比缩放</li>
-                <li><Check />记住上次窗口大小</li>
-                <li><Check />股票与 ETF 都支持</li>
-              </ul>
+            <div className={styles.trustRow}>
+              <span><Check />所有功能免费</span>
+              <span><Check />开源</span>
+              <span><Check />数据保存在本机</span>
             </div>
-            <div className={styles.compactVisual}>
-              <div className={styles.compactGlow} />
-              <Image
-                src="/stock-pet/landing/compact-market.webp"
-                alt="持仓宠物小窗模式，显示当日收益和股票分时曲线"
-                width={680}
-                height={600}
-              />
-              <div className={styles.miniQuote}>
-                <span>纳指科技 ETF</span>
-                <SparkLine variant="soft" />
-                <strong>+1.89%</strong>
-              </div>
+          </div>
+        </div>
+
+        <div id="hero-emotions" className={styles.heroEmotionCards} aria-label="宠物会随收益变化表情、动作和体型">
+          <article className={styles.heroEmotionCard}>
+            <div className={styles.storyCopy}>
+              <span className={styles.profitDot} />
+              <small>收益上涨</small>
+              <h2>从微笑，到开心得装不下。</h2>
+              <p>小涨时轻轻微笑，涨幅越大，跳动和漂浮越明显；大涨时宠物会膨胀、庆祝，分享你的快乐。</p>
             </div>
+            <LiveStockPet rate={0.05} />
           </article>
-
-          <article className={styles.fullPanelFeature}>
-            <div>
-              <span className={styles.featureNumber}>02</span>
-              <p>完整面板</p>
-              <h3>从指数到持仓，不离开桌面。</h3>
-              <span>主要指数、总市值、今日收益和每只股票的分时曲线集中展示，支持搜索名称、证券代码和拼音首字母。</span>
+          <article className={styles.heroEmotionCard}>
+            <div className={styles.storyCopy}>
+              <span className={styles.lossDot} />
+              <small>收益下跌</small>
+              <h2>会难过，也会安静地陪你。</h2>
+              <p>亏损时宠物会垂下眼睛、哭泣并变小。它不会制造更多焦虑，只把情绪留在一个柔软的角落。</p>
             </div>
-            <div className={styles.marketStats}>
-              <div><small>持仓总值</small><strong>¥28.00万</strong></div>
-              <div><small>今日收益</small><strong>+1.13%</strong></div>
-              <SparkLine />
-            </div>
+            <LiveStockPet rate={-4.2} />
           </article>
         </div>
       </section>
 
       <section id="emotion" className={styles.emotionSection}>
-        <div className={styles.emotionBackdrop} aria-hidden="true">+1.13%</div>
-        <div className={styles.emotionVisual}>
-          <div className={styles.petStage}>
-            <span className={styles.petOrbit} />
-            <Image
-              src="/stock-pet/landing/pet-profit.webp"
-              alt="盈利时开心庆祝的水豚宠物"
-              width={320}
-              height={350}
-            />
-          </div>
-          <div className={styles.emotionScale}>
-            <span>悲伤</span>
-            <div><i /><i /><i /><i /><b /></div>
-            <span>庆祝</span>
-          </div>
-        </div>
-        <div className={styles.emotionCopy}>
-          <p>02 / PROFIT HAS EMOTION</p>
-          <h2>数字会波动，<br /><em>陪伴一直在。</em></h2>
-          <span>
-            宠物会根据你的实时收益切换表情、体型和动作。小涨微笑，大涨跳跃庆祝；亏损时委屈、缩小，但不让焦虑占满整个桌面。
-          </span>
-          <div className={styles.emotionRules}>
-            <div><b>±1%</b><span>安静陪伴</span></div>
-            <div><b>&gt; 2%</b><span>明显开心</span></div>
-            <div><b>&gt; 5%</b><span>高强度庆祝</span></div>
-          </div>
+        <SectionTitle
+          index="01"
+          label="PROFIT BECOMES EMOTION"
+          title="它不预测涨跌，"
+          accent="它懂你的心情。"
+          description="宠物直接读取持仓的今日总收益率，用表情、动作和体型告诉你此刻发生了什么。无需打开行情页，抬眼就能知道今天过得怎么样。"
+        />
+
+        <div className={`${styles.emotionSteps} reveal-block`} data-reveal aria-label="收益对应宠物状态">
+          <div><b>±1%</b><span>平静陪伴</span></div>
+          <div><b>&gt; 1%</b><span>开始微笑</span></div>
+          <div><b>&gt; 2%</b><span>明显开心</span></div>
+          <div><b>&gt; 5%</b><span>强烈庆祝</span></div>
+          <div><b>&lt; 0%</b><span>难过变小</span></div>
         </div>
       </section>
 
-      <section id="debug" className={styles.customSection}>
-        <div className={styles.sectionHeading}>
+      <section id="market" className={styles.marketSection}>
+        <SectionTitle
+          index="02"
+          label="YOUR PORTFOLIO AT A GLANCE"
+          title="不打开交易软件，"
+          accent="也能看清今天。"
+          description="持仓总市值、今日收益、主要指数和每只股票的当日分时都集中在一个窗口。它可以缩成桌面小窗，也可以展开认真查看。"
+        />
+
+        <div className={`${styles.dashboardFrame} reveal-block`} data-reveal>
+          <div className={styles.frameTop}>
+            <span><LineChart />持仓行情</span>
+            <small>真实运行界面 · 行情自动刷新</small>
+          </div>
+          <Image
+            src="/stock-pet/landing/portfolio-live.png"
+            alt="持仓宠物行情主页面真实截图，展示持仓总市值、今日收益率、指数和每只股票的当日分时"
+            width={1788}
+            height={1178}
+          />
+        </div>
+
+        <div className={`${styles.marketBenefits} reveal-block`} data-reveal>
+          <div><MonitorUp /><b>小窗偷看</b><span>窗口可缩放、置顶，并记住上一次大小。</span></div>
+          <div><LineChart /><b>当日分时</b><span>股票、ETF 与主要指数走势一眼看清。</span></div>
+          <div><ShieldCheck /><b>数据留在本机</b><span>持仓配置不上传到我们的服务器。</span></div>
+        </div>
+      </section>
+
+      <section id="custom" className={styles.customSection}>
+        <div className={`${styles.customCopy} reveal-block`} data-reveal>
           <p>03 / MAKE IT YOURS</p>
-          <h2>不只一只宠物，<em>也不只一种情绪。</em></h2>
-          <span>选择喜欢的角色，再用独立调试面板预览每档收益下的表情、尺寸、动作和播放速度。</span>
-        </div>
-
-        <div className={styles.customGrid}>
-          <div className={styles.debugPreview}>
-            <div className={styles.debugChrome}>
-              <span /><span /><span />
-              <b>宠物调试</b>
-            </div>
-            <Image
-              src="/stock-pet/landing/pet-debug.webp"
-              alt="持仓宠物自定义和素材调试窗口"
-              width={924}
-              height={1900}
-            />
-          </div>
-          <div className={styles.customCopy}>
-            <div className={styles.customCard}>
-              <div className={styles.iconChip}><Heart /></div>
-              <span>宠物商城</span>
-              <h3>换一只更像你的桌面搭子。</h3>
-              <p>原创行情机器人与多款高清动画皮肤共用同一套收益状态系统。</p>
-            </div>
-            <div className={styles.customCard}>
-              <div className={styles.iconChip}><Bug /></div>
-              <span>独立调试</span>
-              <h3>先预览，再放到桌面。</h3>
-              <p>拖动收益率、调节播放速度、触发动作，不覆盖真实持仓数据。</p>
-            </div>
-            <div className={styles.stateStrip}>
-              <div><span>-5.00%</span><SparkLine variant="down" /></div>
-              <div><span>0.00%</span><SparkLine variant="soft" /></div>
-              <div className={styles.activeState}><span>+5.00%</span><SparkLine /></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.notifySection}>
-        <div className={styles.notifyCopy}>
-          <p>04 / NEVER MISS THE SIGNAL</p>
-          <h2>消息到了，<br /><em>它先告诉你。</em></h2>
+          <h2>换一只喜欢的，<em>再亲手调出它的情绪。</em></h2>
           <span>
-            持仓热门资讯按分钟自动刷新。应用即使保持在桌宠状态，也会更新未读数量，并通过 macOS 原生通知显示来源、标题和对应股票。
+            从宠物素材库选择桌面搭子，再进入独立调试面板。你可以输入任意收益率、改变动画速度、播放动作，先看效果，再回到真实持仓。
           </span>
-          <div className={styles.notifyPoints}>
-            <span><Bell />原生通知</span>
-            <span><RefreshCw />每分钟刷新</span>
-            <span><ShieldCheck />只关注你的持仓</span>
+          <div className={styles.customPoints}>
+            <span><Check />自由选择宠物素材</span>
+            <span><Check />预览不同收益状态</span>
+            <span><Check />调节动画播放速度</span>
+            <span><Check />调试不影响真实数据</span>
           </div>
         </div>
-        <div className={styles.notifyVisual}>
-          <div className={styles.notificationCard}>
-            <MascotMark />
-            <div>
-              <span>腾讯控股 · 热门资讯</span>
-              <strong>腾讯混元上线一周，模型调用量持续增长</strong>
-              <small>刚刚 · 持仓宠物</small>
-            </div>
+        <div className={`${styles.debugShot} reveal-block`} data-reveal>
+          <div className={styles.frameTop}>
+            <span><Bug />宠物调试</span>
+            <small>真实运行界面</small>
           </div>
-          <div className={styles.newsWindow}>
-            <Image
-              src="/stock-pet/news-popover.jpg"
-              alt="持仓热门资讯列表"
-              width={510}
-              height={528}
-            />
-          </div>
-          <span className={styles.bellBadge}><Bell />3</span>
+          <Image
+            src="/stock-pet/landing/pet-debug-live.png"
+            alt="宠物素材选择和动画调试面板真实截图"
+            width={1336}
+            height={1554}
+          />
         </div>
       </section>
 
-      <section id="download" className={styles.downloadSection}>
-        <div className={styles.downloadOrb} aria-hidden="true"><MascotMark /></div>
-        <p><Sparkles />STOCK PET FOR MAC</p>
-        <h2>让今天的涨跌，<br />变成桌面上的一点情绪。</h2>
-        <span>开源、轻量、数据留在本机。现在下载持仓宠物 v0.4.1。</span>
+      <section id="alerts" className={styles.alertSection}>
+        <SectionTitle
+          index="04"
+          label="TIMELY PORTFOLIO ALERTS"
+          title="重要变化发生时，"
+          accent="不用等你想起来看。"
+          description="通知栏会聚合当前持仓的热门资讯，也会在收益或持仓出现值得关注的变化时主动提醒。内容与持仓相关，不用在信息流里反复筛选。"
+        />
+
+        <div className={styles.alertGrid}>
+          <article className={`${styles.alertCard} reveal-block`} data-reveal>
+            <div>
+              <BellRing />
+              <span>持仓热门资讯</span>
+              <h3>只看与你有关的财经热点。</h3>
+              <p>根据当前持仓聚合热门资讯，显示来源、标题与相关股票。</p>
+            </div>
+            <Image
+              src="/stock-pet/landing/notification-news-live.png"
+              alt="持仓热门资讯 macOS 原生通知真实截图"
+              width={710}
+              height={168}
+            />
+          </article>
+          <article className={`${styles.alertCard} reveal-block`} data-reveal>
+            <div>
+              <Zap />
+              <span>持仓异动提醒</span>
+              <h3>涨跌达到状态时，宠物也会告诉你。</h3>
+              <p>收益变化触发原生通知，同时同步宠物此刻的情绪状态。</p>
+            </div>
+            <Image
+              src="/stock-pet/landing/notification-profit-live.png"
+              alt="持仓收益异动 macOS 原生通知真实截图"
+              width={704}
+              height={132}
+            />
+          </article>
+        </div>
+      </section>
+
+      <section id="download" className={`${styles.downloadSection} reveal-block`} data-reveal>
+        <Image src="/stock-pet/app-icon.png" alt="持仓宠物应用图标" width={108} height={108} />
+        <p><Sparkles />NO SUBSCRIPTION · NO PAYWALL</p>
+        <h2>以上这些，<br /><span>现在全部免费。</span></h2>
+        <p className={styles.downloadIntro}>
+          宠物情绪、实时收益、当日分时、素材调试、持仓资讯与异动通知，没有订阅，也没有隐藏付费功能。
+        </p>
+        <div className={styles.freeChecklist}>
+          <span><Check />免费使用</span>
+          <span><Check />GitHub 开源</span>
+          <span><Check />本地保存</span>
+          <span><Check />持续更新</span>
+        </div>
         <div className={styles.downloadActions}>
           <a className={styles.primaryButton} href={RELEASE_URL}>
-            <ArrowDownToLine />下载 macOS 安装包
-            <ArrowRight />
+            <ArrowDownToLine />下载 macOS 安装包<ArrowRight />
           </a>
-          <a className={styles.ghostButton} href={REPOSITORY_URL} target="_blank" rel="noreferrer">
-            <Github />查看 GitHub
+          <a className={styles.secondaryButton} href={REPOSITORY_URL} target="_blank" rel="noreferrer">
+            <Github />查看 GitHub<ExternalLink />
           </a>
         </div>
-        <small>需要 macOS 15.0 或更高版本 · Apple Silicon · 本项目不构成投资建议</small>
+        <small>需要 macOS 15.0 或更高版本 · Apple Silicon · 页面素材均为真实产品截图 · 本项目不构成投资建议</small>
       </section>
 
       <footer className={styles.footer}>
-        <Link className={styles.brand} href="/">
-          <MascotMark />
-          <span>持仓宠物</span>
-        </Link>
-        <p>Designed &amp; built by Andy Yang · Shenzhen · 2026</p>
+        <Link className={styles.brand} href="/"><Brand /></Link>
+        <p>Designed &amp; built by Andy Yang · 2026</p>
         <div>
-          <Link href="/">返回 Andy 的主页</Link>
+          <Link href="/">返回主页</Link>
           <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">GitHub</a>
         </div>
       </footer>

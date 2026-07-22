@@ -19,9 +19,13 @@ export function useScrollReveal(
       const elementMargin = element.dataset.revealMargin ?? rootMargin;
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          if (once) observer.unobserve(entry.target);
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            if (once) observer.unobserve(entry.target);
+            return;
+          }
+
+          if (!once) entry.target.classList.remove("is-visible");
         },
         { threshold: elementThreshold, rootMargin: elementMargin },
       );
