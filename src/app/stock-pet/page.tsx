@@ -21,7 +21,7 @@ import LiveStockPet from "./LiveStockPet";
 import styles from "./page.module.css";
 
 const RELEASE_URL =
-  "https://github.com/andy304yang/Pet-stock/releases/download/v0.4.1/StockPet-v0.4.1.dmg";
+  "https://github.com/andy304yang/Pet-stock/releases/latest/download/StockPet.dmg";
 const REPOSITORY_URL = "https://github.com/andy304yang/Pet-stock";
 
 export const metadata: Metadata = {
